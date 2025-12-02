@@ -260,7 +260,7 @@ This project is licensed under the MIT License - see LICENSE file for details.
 **Kartik Sharma**
 
 - GitHub: [@kartik1194](https://github.com/kartik1194)
-- Email: kartik@example.com
+- Email: karrtikchd@gmail.com
 
 ## 🙏 Acknowledgments
 
