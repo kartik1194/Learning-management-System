@@ -50,7 +50,7 @@ function App() {
         }
       />
       <Route
-        path="/instructor/edit-course/:courseId"
+      <Route path="/instructor/edit-course/:courseId"
         element={
           <RouteGuard
             element={<AddNewCoursePage />}
@@ -58,6 +58,10 @@ function App() {
             user={auth?.user}
           />
         }
+      />
+      <Route
+        path="/payment-return"
+        element={<PaypalPaymentReturnPage />}
       />
       <Route
         path="/"
@@ -76,7 +80,6 @@ function App() {
           path="course/details/:id"
           element={<StudentViewCourseDetailsPage />}
         />
-        <Route path="payment-return" element={<PaypalPaymentReturnPage />} />
         <Route path="student-courses" element={<StudentCoursesPage />} />
         <Route
           path="course-progress/:id"
