@@ -3,6 +3,15 @@ const Order = require("../../models/Order");
 const Course = require("../../models/Course");
 const StudentCourses = require("../../models/StudentCourses");
 
+// Get client URL with fallback for production
+const getClientURL = () => {
+  if (process.env.CLIENT_URL) {
+    return process.env.CLIENT_URL;
+  }
+  // Production fallback
+  return "https://learning-management-system-client-q7ze.onrender.com";
+};
+
 const createOrder = async (req, res) => {
   try {
     const {
@@ -23,14 +32,16 @@ const createOrder = async (req, res) => {
       coursePricing,
     } = req.body;
 
+    const clientURL = getClientURL();
+
     const create_payment_json = {
       intent: "sale",
       payer: {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: `${process.env.CLIENT_URL}/payment-return`,
-        cancel_url: `${process.env.CLIENT_URL}/payment-cancel`,
+        return_url: `${clientURL}/payment-return`,
+        cancel_url: `${clientURL}/payment-cancel`,
       },
       transactions: [
         {
