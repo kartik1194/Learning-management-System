@@ -5,12 +5,14 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { AuthContext } from "@/context/auth-context";
 import { InstructorContext } from "@/context/instructor-context";
 import { fetchInstructorCourseListService } from "@/services";
-import { BarChart, Book, LogOut } from "lucide-react";
+import { BarChart, Book, LogOut, Moon, Sun } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 function InstructorDashboardpage() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const { resetCredentials } = useContext(AuthContext);
+  const { theme, setTheme } = useTheme();
   const { instructorCoursesList, setInstructorCoursesList } =
     useContext(InstructorContext);
 
@@ -22,6 +24,10 @@ function InstructorDashboardpage() {
   useEffect(() => {
     fetchAllCourses();
   }, []);
+
+  function toggleTheme() {
+    setTheme(theme === "dark" ? "light" : "dark");
+  }
 
   const menuItems = [
     {
@@ -52,10 +58,24 @@ function InstructorDashboardpage() {
   console.log(instructorCoursesList, "instructorCoursesList");
 
   return (
-    <div className="flex h-full min-h-screen bg-gray-100">
-      <aside className="w-64 bg-white shadow-md hidden md:block">
+    <div className="flex h-full min-h-screen bg-gray-100 dark:bg-slate-950">
+      <aside className="w-64 bg-white dark:bg-slate-900 shadow-md hidden md:block">
         <div className="p-4">
-          <h2 className="text-2xl font-bold mb-4">Instructor View</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold">Instructor View</h2>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="rounded-full"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
           <nav>
             {menuItems.map((menuItem) => (
               <Button
@@ -75,7 +95,7 @@ function InstructorDashboardpage() {
           </nav>
         </div>
       </aside>
-      <main className="flex-1 p-8 overflow-y-auto">
+      <main className="flex-1 p-8 overflow-y-auto bg-background text-foreground">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
