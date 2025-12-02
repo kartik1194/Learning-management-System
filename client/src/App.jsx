@@ -50,7 +50,7 @@ function App() {
         }
       />
       <Route
-      <Route path="/instructor/edit-course/:courseId"
+        path="/instructor/edit-course/:courseId"
         element={
           <RouteGuard
             element={<AddNewCoursePage />}
@@ -59,10 +59,7 @@ function App() {
           />
         }
       />
-      <Route
-        path="/payment-return"
-        element={<PaypalPaymentReturnPage />}
-      />
+      <Route path="/payment-return" element={<PaypalPaymentReturnPage />} />
       <Route
         path="/"
         element={
